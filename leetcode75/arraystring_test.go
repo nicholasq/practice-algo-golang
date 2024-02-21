@@ -1,4 +1,4 @@
-package arraystring
+package leetcode75
 
 import (
 	"fmt"
@@ -84,5 +84,94 @@ func TestKidsWithCandies(t *testing.T) {
 			t.Errorf("Expected: %v, got %v", c.want, got)
 		}
 		fmt.Printf("KidsWithCandies() - elapsed time: %dns\n", elapsed.Nanoseconds())
+	}
+}
+
+func TestCanPlaceFlowers(t *testing.T) {
+
+	type args struct {
+		flowerBed []int
+		toPlant   int
+	}
+
+	type testcase struct {
+		input args
+		want  bool
+	}
+
+	testCases := []testcase{
+		{
+			input: args{flowerBed: []int{1, 0, 0, 0, 1}, toPlant: 1},
+			want:  true,
+		},
+		{
+			input: args{flowerBed: []int{1, 0, 0, 0, 1}, toPlant: 2},
+			want:  false,
+		},
+		{
+			input: args{flowerBed: []int{0}, toPlant: 1},
+			want:  true,
+		},
+		{
+			input: args{flowerBed: []int{0}, toPlant: 2},
+			want:  false,
+		},
+		{
+			input: args{flowerBed: []int{0, 1, 0}, toPlant: 1},
+			want:  false,
+		},
+		{
+			input: args{flowerBed: []int{0, 0, 0}, toPlant: 1},
+			want:  true,
+		},
+		{
+			input: args{flowerBed: []int{0, 0, 0}, toPlant: 2},
+			want:  true,
+		},
+		{
+			input: args{flowerBed: []int{1, 0, 0, 0, 0, 1}, toPlant: 2},
+			want:  false,
+		},
+		{
+			input: args{flowerBed: []int{0, 0, 0, 0, 0, 1, 0, 0}, toPlant: 0},
+			want:  true,
+		},
+	}
+
+	for _, c := range testCases {
+		start := time.Now()
+		got := CanPlaceFlowers(c.input.flowerBed, c.input.toPlant)
+		end := time.Now()
+		elapsed := end.Sub(start)
+		if !reflect.DeepEqual(c.want, got) {
+			t.Errorf("Expected: %v, got %v", c.want, got)
+		}
+		fmt.Printf("CanPlaceFlowers() - elapsed time: %dns\n", elapsed.Nanoseconds())
+	}
+}
+
+func TestReverseVowels(t *testing.T) {
+
+	type testcase struct {
+		input, want string
+	}
+
+	testCases := []testcase{
+		{"hello", "holle"},
+		{"leetcode", "leotcede"},
+		{" ", " "},
+		{"a.", "a."},
+		{"!!!", "!!!"},
+	}
+
+	for _, c := range testCases {
+		start := time.Now()
+		got := ReverseVowels(c.input)
+		end := time.Now()
+		elapsed := end.Sub(start)
+		if !reflect.DeepEqual(c.want, got) {
+			t.Errorf("Expected: %v, got %v", c.want, got)
+		}
+		fmt.Printf("ReverseVowels() - elapsed time: %dns\n", elapsed.Nanoseconds())
 	}
 }
